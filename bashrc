@@ -1,3 +1,9 @@
+#
+# tmux likes this
+#
+
+export TERM=screen-256color
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -121,5 +127,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# added by Miniconda3 3.10.1 installer
-export PATH="/home/myles/miniconda3/bin:$PATH"
+# added by Miniconda3 3.19.0 installer
+export PATH="/home/myles/software/conda/bin:$PATH"
+. activate dev35
+

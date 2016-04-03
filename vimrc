@@ -20,7 +20,7 @@ autocmd FileType make setlocal noexpandtab
 set ruler
 set showcmd
 
-colorscheme 256-grayvim
+colorscheme nofrils-dark
 
 if has('vim_starting')
   if &compatible
@@ -45,3 +45,4 @@ NeoBundleCheck
 
 map <C-t> :NERDTreeToggle<CR>
 filetype plugin indent on
+
