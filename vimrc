@@ -1,48 +1,57 @@
-set number
-set nobackup
-set noswapfile
+"
+"   plugins with vim-plug
+"
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-fugitive'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'mileszs/ack.vim'
+
+call plug#end()
+
+let g:ctrlp_working_path_mode = 'ra'
+let g:ackprg = 'ag --vimgrep --smart-case'
+
+"
+"   basic settings
+"
+
 set t_Co=256
-set mouse=incr
-set hlsearch
+syntax on
+set number
+set ts=4
+set shiftwidth=4
+set expandtab
 set autoindent
 set smartindent
+set noswapfile
+set nobackup
+set showmatch
+set hlsearch
+set incsearch
+set mouse=incr
+set title
+set laststatus=2
+set backspace=indent,eol,start
+set lazyredraw
 
-syntax on
-
-set smarttab
-set expandtab
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
-
-autocmd FileType make setlocal noexpandtab
-
-set ruler
-set showcmd
+"
+"   colorscheme
+"
 
 colorscheme nofrils-dark
 
-if has('vim_starting')
-  if &compatible
-    set nocompatible               " Be iMproved
-  endif
-  set runtimepath+=/home/myles/.vim/bundle/neobundle.vim/
-endif
+"
+"   filetype behavior
+"
 
-call neobundle#begin(expand('/home/myles/.vim/bundle'))
-
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'ctrlpvim/ctrlp.vim'
-NeoBundle 'flazz/vim-colorschemes'
-NeoBundle 'bling/vim-airline'
-
-call neobundle#end()
-
-NeoBundleCheck
-
-map <C-t> :NERDTreeToggle<CR>
 filetype plugin indent on
 
+au BufRead,BufNewFile *.sv set filetype=verilog
+au BufRead,BufNewFile *.svh set filetype=verilog
+au BufRead,BufNewFile *.vh set filetype=verilog
+au! FileType python setl nosmartindent
+au! FileType verilog setl nosmartindent
+au! FileType sass setl sw=4

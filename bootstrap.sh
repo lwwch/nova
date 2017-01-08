@@ -6,7 +6,7 @@ create_dirs() {
   echo "creating dirs..."
 
   mkdir -p ~/projects
-  mkdir -p ~/software
+  mkdir -p ~/third_party
 
 }
 
@@ -26,11 +26,11 @@ install_packages() {
 
 install_local_configs() {
 
-  echo "installing local configs..."
+  echo "concating local configs..."
 
-  cp vimrc ~/.vimrc
-  cp bashrc ~/.bashrc
-  cp tmux.conf ~/.tmux.conf
+  cat vimrc >> ~/.vimrc
+  cat bashrc >> ~/.bashrc
+  cat tmux.conf >> ~/.tmux.conf
 
   mkdir -p ~/.vim/colors
   cp vim/colors/* ~/.vim/colors
@@ -41,7 +41,7 @@ install_conda() {
 
   echo "installing conda env..."
 
-  pushd ~/software
+  pushd ~/third_party
   wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 
 }
