@@ -41,7 +41,7 @@ set lazyredraw
 "   colorscheme
 "
 
-colorscheme nofrils-dark
+colorscheme monochrome
 
 "
 "   filetype behavior
