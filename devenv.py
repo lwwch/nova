@@ -116,7 +116,8 @@ def link_dotfiles(repo):
     link(fonts, os.path.join(repo, "fonts"))
     # need to rebuild the font cache
     log("rebuilding the font cache...")
-    call("sudo fc-cache -fv")
+    log("    ... actually skipping for now.")
+    #call("sudo fc-cache -fv")
 
 def set_terminal_theme(repo, name):
 
@@ -128,7 +129,7 @@ def set_terminal_theme(repo, name):
     #   just uses the default profile for now
     #
 
-    profile_uuid = call("gsettings get org.gnome.Terminal.ProfilesList default")
+    profile_uuid = call("gsettings get org.gnome.Terminal.ProfilesList default")[1:-1]
     log("gnome-terminal profile %s", profile_uuid)
 
     path = "org.gnome.Terminal.Legacy.Profile:" + \
