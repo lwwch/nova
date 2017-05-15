@@ -134,7 +134,10 @@ def set_terminal_theme(repo, name):
            ("/org/gnome/terminal/legacy/profiles:/:%s/" % profile_uuid)
 
     def setkey(key, value):
-        call("gsettings set {path} {key} \"{value}\"".format(**locals()))
+        call("gsettings set {path} {key} \"{value}\"".format(
+            path    = path,
+            key     = key,
+            value   = value)
 
     def gcolor(hcol):
         r = int("0x" + hcol[0:2], 16)
