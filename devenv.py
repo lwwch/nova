@@ -39,7 +39,7 @@ def backup(path):
         log("backing up %s", bak)
         os.rename(path,bak)
 
-def link(src,dst):
+def link(dst,src):
 
     if not os.path.exists(src):
         raise FileNotFoundError(src)
