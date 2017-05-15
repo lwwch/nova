@@ -6,9 +6,22 @@ dev environment control
 """
 
 import os
+import subprocess
 
 def log(fmt,*args):
     print(fmt % args)
+
+def call(cmd,*args):
+    cmd = cmd % args
+    with subprocess.Popen(
+        cmnd, shell=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT) as p:
+        p.wait()
+        stdout = p.stdout.read().decode()
+        if p.returncode != 0:
+            raise ValueError(stdout)
+        return stdout
 
 def backup(path):
 
@@ -104,8 +117,8 @@ def set_terminal_theme(repo, name):
     profile_uuid = call("gsettings get org.gnome.Terminal.ProfilesList default")
     log("gnome-terminal profile %s", profile_uuid)
 
-    path = "org.gnome.Terminal.Legacy.Profile:" +
-           "/org/gnome/terminal/legacy/profiles:/:%s/" % profile_uuid
+    path = "org.gnome.Terminal.Legacy.Profile:" + \
+           ("/org/gnome/terminal/legacy/profiles:/:%s/" % profile_uuid)
 
     def setkey(key, value):
         call("gsettings set {path} {key} \"{value}\"".format(**locals()))
