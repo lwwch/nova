@@ -152,7 +152,7 @@ def set_terminal_theme(repo, name):
     
     setkey("font",              "Hack 7")
     setkey("palette",           palette)
-    setkey("foreground-color",  gcolor(vals["base05"]))
+    setkey("foreground-color",  gcolor(vals["base07"]))
     setkey("background-color",  gcolor(vals["base00"]))
     setkey("use-theme-colors",  "false")
     setkey("use-system-font",   "false")
