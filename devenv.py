@@ -11,6 +11,15 @@ import subprocess
 def log(fmt,*args):
     print(fmt % args)
 
+def linedict(sep, fd):
+    o = dict()
+    while True:
+        l = fd.readline()
+        if not l: break
+        k,v = l.split(sep,1)
+        o[k.strip()] = v.strip()
+    return o
+
 def call(cmd,*args):
     cmd = cmd % args
     with subprocess.Popen(
@@ -103,6 +112,7 @@ def link_dotfiles(repo):
     backup(fonts)
     link(fonts, os.path.join(repo, "fonts"))
     # need to rebuild the font cache
+    log("rebuilding the font cache...")
     call("sudo fc-cache -fv")
 
 def set_terminal_theme(repo, name):
