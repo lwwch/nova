@@ -154,6 +154,8 @@ def set_terminal_theme(repo, name):
     setkey("palette",           palette)
     setkey("foreground-color",  gcolor(vals["base05"]))
     setkey("background-color",  gcolor(vals["base00"]))
+    setkey("use-theme-colors",  "false")
+    setkey("use-system-font",   "false")
 
 def main():
 
