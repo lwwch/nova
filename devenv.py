@@ -24,6 +24,7 @@ def linedict(sep, fd):
 
 def call(cmd,*args):
     cmd = cmd % args
+    log(cmd)
     with subprocess.Popen(
         cmd, shell=True,
         stdout=subprocess.PIPE,
