@@ -45,6 +45,9 @@ echo "bootstrapping packages..."
 cd ${REPO}
 sudo apt-get install -y $(grep -vE "^#" ./packages)
 
+echo "setting global permissions for font dirs..."
+sudo chmod a+w /usr/local/share/fonts
+
 SCRIPT=$(readlink -f ./devenv.py)
 PYTHON=$(which python3)
 [ "$PYTHON" == "" ] && (echo "cannot find python3" && exit 1)

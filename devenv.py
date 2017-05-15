@@ -16,6 +16,8 @@ def linedict(sep, fd):
     while True:
         l = fd.readline()
         if not l: break
+        l = l.strip()
+        if l == "" or l.startswith("#"): continue
         k,v = l.split(sep,1)
         o[k.strip()] = v.strip()
     return o
