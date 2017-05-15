@@ -48,7 +48,7 @@ def link(dst,src):
     if not os.path.exists(dstdir):
         os.makedirs(dstdir)
 
-    os.symlink(src, dst)
+    os.symlink(dst, src)
 
 def link_dotfiles(repo):
 
