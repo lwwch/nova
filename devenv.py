@@ -33,7 +33,7 @@ def call(cmd,*args):
         stdout = p.stdout.read().decode()
         if p.returncode != 0:
             raise ValueError(stdout)
-        return stdout
+        return stdout.strip()   # dont care about trailing newlines
 
 def backup(path):
 
