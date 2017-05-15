@@ -147,10 +147,11 @@ def set_terminal_theme(repo, name):
         b = int("0x" + hcol[4:6], 16)
         return """'rgb(%d,%d,%d)'""" % (r,g,b)
 
-    palatte = list(gcolor(vals["base%02x" % i]) for i in range(16))
+    palette = list(gcolor(vals["base%02x" % i]) for i in range(16))
+    palette = "[" + ",".join(palette) + "]"
     
     setkey("font",              "Hack 7")
-    setkey("palatte",           palatte)
+    setkey("palette",           palette)
     setkey("foreground-color",  gcolor(vals["base05"]))
     setkey("background-color",  gcolor(vals["base00"]))
 
