@@ -137,7 +137,7 @@ def set_terminal_theme(repo, name):
         call("gsettings set {path} {key} \"{value}\"".format(
             path    = path,
             key     = key,
-            value   = value)
+            value   = value))
 
     def gcolor(hcol):
         r = int("0x" + hcol[0:2], 16)
