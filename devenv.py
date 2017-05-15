@@ -14,7 +14,7 @@ def log(fmt,*args):
 def call(cmd,*args):
     cmd = cmd % args
     with subprocess.Popen(
-        cmnd, shell=True,
+        cmd, shell=True,
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT) as p:
         p.wait()
@@ -48,6 +48,7 @@ def link(dst,src):
     if not os.path.exists(dstdir):
         os.makedirs(dstdir)
 
+    log("linked to %s", src)
     os.symlink(src, dst)
 
 def link_dotfiles(repo):
