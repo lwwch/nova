@@ -31,7 +31,7 @@ def backup(path):
     if os.path.islink(path):
         real = os.path.realpath(path)
         log("removing symlink to %s", real)
-        os.remove(path)
+        os.unlink(path)
     else:
         bak = path + ".bak"
         if os.path.exists(bak):
