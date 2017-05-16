@@ -9,6 +9,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mileszs/ack.vim'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'benmills/vimux'
 
 call plug#end()
 
@@ -56,3 +57,9 @@ au BufRead,BufNewFile *.vh set filetype=verilog
 au! FileType python setl nosmartindent
 au! FileType verilog setl nosmartindent
 au! FileType sass setl sw=4
+
+"
+"   vimux
+"
+
+map <leader>rx :VimuxPromptCommand<CR>
