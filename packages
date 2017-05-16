@@ -1,10 +1,10 @@
 build-essential
 git
 python3
-python3-gi
 chromium-browser
 tmux
 vim
 i3-wm
 fontconfig
 ranger
+silversearcher-ag

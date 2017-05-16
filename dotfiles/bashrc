@@ -193,3 +193,12 @@ fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
+
+#
+#   startx on initial login
+#   copied from https://wiki.archlinux.org/index.php/Xinit
+#
+
+if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
+   exec startx
+fi

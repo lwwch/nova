@@ -48,9 +48,15 @@ sudo apt-get install -y $(grep -vE "^#" ./packages)
 echo "setting global permissions for font dirs..."
 sudo chmod a+w /usr/local/share/fonts
 
+echo "installing secondary files..."
+if [ ! -d ${HOME}/.vim/bundle ]; then
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
+
 SCRIPT=$(readlink -f ./devenv.py)
 PYTHON=$(which python3)
 [ "$PYTHON" == "" ] && (echo "cannot find python3" && exit 1)
 
 echo "packages installed. handing over to python script ${SCRIPT}"
-$PYTHON $SCRIPT
+sudo $PYTHON $SCRIPT

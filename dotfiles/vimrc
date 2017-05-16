@@ -18,7 +18,7 @@ let g:ackprg = 'ag --vimgrep --smart-case'
 "   basic settings
 "
 
-set t_Co=256
+set t_Co=16
 syntax on
 set number
 set ts=4
@@ -41,7 +41,7 @@ set lazyredraw
 "   colorscheme
 "
 
-colorscheme monochrome
+colorscheme void
 
 "
 "   filetype behavior

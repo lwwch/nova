@@ -6,7 +6,9 @@ dev environment control
 """
 
 import os
+import re
 import subprocess
+from datetime import datetime
 
 def log(fmt,*args):
     print(fmt % args)
@@ -87,9 +89,9 @@ def link_dotfiles(repo):
     backup(vimrc)
     link(vimrc, os.path.join(dots, "vimrc"))
 
-    vimdir = os.path.join(home, ".vim")
+    vimdir = os.path.join(home, ".vim/colors")
     backup(vimdir)
-    link(vimdir, os.path.join(dots, "vim"))
+    link(vimdir, os.path.join(dots, "vim-colors"))
 
     #
     #   tmux
@@ -108,6 +110,14 @@ def link_dotfiles(repo):
     link(i3, os.path.join(dots, "i3.conf"))
 
     #
+    #   xinitrc
+    #
+
+    xinit = os.path.join(home, ".xinitrc")
+    backup(xinit)
+    link(xinit, os.path.join(dots, "xinitrc"))
+
+    #
     #   fonts
     #
 
@@ -120,6 +130,10 @@ def link_dotfiles(repo):
     #call("sudo fc-cache -fv")
 
 def set_terminal_theme(repo, name):
+
+    """
+    NOT USED -- here for reference
+    """
 
     theme = os.path.join(repo, "themes", name)
     with open(theme, "r") as fd:
@@ -147,15 +161,46 @@ def set_terminal_theme(repo, name):
         b = int("0x" + hcol[4:6], 16)
         return """'rgb(%d,%d,%d)'""" % (r,g,b)
 
-    palette = list(gcolor(vals["base%02x" % i]) for i in range(16))
+    # this is apparently the crazy order of colors required
+    # to make gnome-terminal happy with respect to bolding, etc
+    palette = list(gcolor(vals["base%02x" % i]) for i in [0,8,0xb,0xa,0xd,0xe,0xc,5,3,9,1,2,4,6,0xf,7])
     palette = "[" + ",".join(palette) + "]"
     
-    setkey("font",              "Hack 7")
-    setkey("palette",           palette)
-    setkey("foreground-color",  gcolor(vals["base07"]))
-    setkey("background-color",  gcolor(vals["base00"]))
-    setkey("use-theme-colors",  "false")
-    setkey("use-system-font",   "false")
+    setkey("font",                  "Hack 7")
+    setkey("palette",               palette)
+    setkey("foreground-color",      gcolor(vals["base07"]))
+    setkey("background-color",      gcolor(vals["base00"]))
+    setkey("bold-color",            gcolor(vals["base07"]))
+    setkey("bold-color-same-as-fg", "true")
+    setkey("use-theme-colors",      "false")
+    setkey("use-system-font",       "false")
+
+def boot_to_text():
+
+    #
+    #   my bootup process goes straight to console login without any greeters
+    #
+
+    grub = "/etc/default/grub"
+    backup(grub)
+
+    with open(grub, "r") as fd:
+        src = fd.readlines()
+
+    mode = "text"
+    for i,l in enumerate(lines):
+        if re.match("GRUB_CMDLINE_LINUX_DEFAULT=", l):
+            log("replacing line '%s' with mode '%s'", l, mode)
+            l = "GRUB_CMDLINE_LINUX_DEFAULT=\"%s\"" % mode
+            lines[i] = l
+    lines.append("GRUB_TERMINAL=console")
+
+    with open(grub, "w") as fd:
+        for l in lines:
+            fd.write(l)
+
+    log("updated GRUB config, updating boot...")
+    call("update-grub")
 
 def main():
 
@@ -167,18 +212,8 @@ def main():
     repo = os.path.join(
         os.getcwd())
 
-    #
-    #   main actions:
-    #
-    #   [x] link any dotfiles not already linked into this repo
-    #   [ ] detect changes for any files that were copied vs linked,
-    #       so they can be pushed back to github if needed?
-    #   [x] apply theme to terminal, generate color scheme files if needed
-    #   [ ] restart any processes/services to use the new files
-    #
-
     link_dotfiles(repo)
-    set_terminal_theme(repo, "void")
+    boot_to_text()
 
 if __name__ == "__main__":
     main()
