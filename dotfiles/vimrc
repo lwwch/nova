@@ -8,6 +8,7 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-fugitive'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mileszs/ack.vim'
+Plug 'christoomey/vim-tmux-navigator'
 
 call plug#end()
 
