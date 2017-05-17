@@ -111,15 +111,19 @@ def link_dotfiles(repo):
 
     blocks = os.path.join(home, ".config/i3/blocks.conf")
     backup(blocks)
-    link(blocks, os.path.join(dots, "blocks.conf"))
+    link(blocks, os.path.join(dots, "i3blocks.conf"))
 
     #
-    #   xinitrc
+    #   x stuff
     #
 
     xinit = os.path.join(home, ".xinitrc")
     backup(xinit)
     link(xinit, os.path.join(dots, "xinitrc"))
+
+    xrs = os.path.join(home, ".Xresources")
+    backup(xrs)
+    link(xrs, os.path.join(dots, "Xresources"))
 
     #
     #   fonts
@@ -130,13 +134,11 @@ def link_dotfiles(repo):
     link(fonts, os.path.join(repo, "fonts"))
     # need to rebuild the font cache
     log("rebuilding the font cache...")
-    call("sudo fc-cache -fv")
+    log("    actually, skipping. to rebuild manually:")
+    log("    $ sudo fc-cache -fv")
+    #call("sudo fc-cache -fv")
 
-def set_terminal_theme(repo, name):
-
-    """
-    NOT USED -- here for reference
-    """
+def set_terminal_theme(repo):
 
     theme = os.path.join(repo, "themes", name)
     with open(theme, "r") as fd:
@@ -187,23 +189,18 @@ def boot_to_text():
     grub = "/etc/default/grub"
 
     with open(grub, "r") as fd:
-        src = fd.readlines()
-    backup(grub)
+        src = fd.read()
 
-    mode = "text"
-    for i,l in enumerate(lines):
-        if re.match("GRUB_CMDLINE_LINUX_DEFAULT=", l):
-            log("replacing line '%s' with mode '%s'", l, mode)
-            l = "GRUB_CMDLINE_LINUX_DEFAULT=\"%s\"" % mode
-            lines[i] = l
-    lines.append("GRUB_TERMINAL=console")
+    boot_mode = re.compile("GRUB_CMDLINE_LINUX_DEFAULT=\s*\"(.*?)\"")
+    m = boot_mode.search(src)
 
-    with open(grub, "w") as fd:
-        for l in lines:
-            fd.write(l)
+    if m is None:
+        raise ValueError("cannot find key in grub conf")
 
-    log("updated GRUB config, updating boot...")
-    call("update-grub")
+    if m.group(1) == "text":
+        log("no need to modify grub")
+        return
+    raise ValueError("modification of grub not supported. value='%s'" % m.group(1))
 
 def main():
 
@@ -216,6 +213,7 @@ def main():
         os.getcwd())
 
     link_dotfiles(repo)
+    #set_terminal_theme(repo)
     boot_to_text()
 
 if __name__ == "__main__":
