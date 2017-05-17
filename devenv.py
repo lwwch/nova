@@ -10,6 +10,11 @@ import re
 import subprocess
 from datetime import datetime
 
+def ensure_dir(path):
+    if os.path.exists(path):
+        return
+    os.makedirs(path)
+
 def log(fmt,*args):
     print(fmt % args)
 
@@ -109,9 +114,9 @@ def link_dotfiles(repo):
     backup(i3)
     link(i3, os.path.join(dots, "i3.conf"))
 
-    blocks = os.path.join(home, ".config/i3/blocks.conf")
-    backup(blocks)
-    link(blocks, os.path.join(dots, "i3blocks.conf"))
+    polybar = os.path.join(home, ".polybar")
+    backup(polybar)
+    link(polybar, os.path.join(dots, "polybar.conf"))
 
     #
     #   x stuff
@@ -202,6 +207,13 @@ def boot_to_text():
         return
     raise ValueError("modification of grub not supported. value='%s'" % m.group(1))
 
+def secondary_files(repo):
+
+    home = os.getenv("HOME")
+    third_party = os.path.join(home, "third_party")
+    ensure_dir(third_party)
+    ensure_dir(os.path.join(home, "projects"))
+    
 def main():
 
     from argparse import ArgumentParser
@@ -214,6 +226,7 @@ def main():
 
     link_dotfiles(repo)
     #set_terminal_theme(repo)
+    secondary_files(repo)
     boot_to_text()
 
 if __name__ == "__main__":

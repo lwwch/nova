@@ -63,3 +63,4 @@ au! FileType sass setl sw=4
 "
 
 map <leader>rx :VimuxPromptCommand<CR>
+map <leader>rr :VimuxRunLastCommand<CR>
