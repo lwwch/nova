@@ -4,7 +4,11 @@ python3
 chromium-browser
 tmux
 vim
-i3-wm
+i3
+i3blocks
+feh
 fontconfig
 ranger
+thunar
+neofetch
 silversearcher-ag

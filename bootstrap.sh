@@ -43,6 +43,9 @@ fi
 
 echo "bootstrapping packages..."
 cd ${REPO}
+# perhaps add a ppa file if we do this enough...
+sudo add-apt-repository ppa:dawidd0811/neofetch
+sudo apt-get update
 sudo apt-get install -y $(grep -vE "^#" ./packages)
 
 echo "setting global permissions for font dirs..."

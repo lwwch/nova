@@ -1,7 +1,9 @@
 [ ] login manager (console based?)
 [ ] different computer profiles (will need home, work, etc at some point)
-[ ] vim theme
-[ ] vim+tmux integration
+[x] vim theme
+[x] vim+tmux integration
 [ ] i3bar and/or polybar, lemonbar, etc
-[ ] automounting stuff with ranger?
+[x] automounting stuff with ranger?
 [ ] theme support to lockscreen color?
+[ ] i3 colors
+[ ] i3bar + i3blocks config

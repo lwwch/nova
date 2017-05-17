@@ -109,6 +109,10 @@ def link_dotfiles(repo):
     backup(i3)
     link(i3, os.path.join(dots, "i3.conf"))
 
+    blocks = os.path.join(home, ".config/i3/blocks.conf")
+    backup(blocks)
+    link(blocks, os.path.join(dots, "blocks.conf"))
+
     #
     #   xinitrc
     #
@@ -126,8 +130,7 @@ def link_dotfiles(repo):
     link(fonts, os.path.join(repo, "fonts"))
     # need to rebuild the font cache
     log("rebuilding the font cache...")
-    log("    ... actually skipping for now.")
-    #call("sudo fc-cache -fv")
+    call("sudo fc-cache -fv")
 
 def set_terminal_theme(repo, name):
 
@@ -182,10 +185,10 @@ def boot_to_text():
     #
 
     grub = "/etc/default/grub"
-    backup(grub)
 
     with open(grub, "r") as fd:
         src = fd.readlines()
+    backup(grub)
 
     mode = "text"
     for i,l in enumerate(lines):

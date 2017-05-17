@@ -202,3 +202,11 @@ fi
 if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
    exec startx
 fi
+
+export PATH=${HOME}/devenv/utils:${PATH}
+
+#
+#   git aliases
+#
+
+alias gs="git status"
