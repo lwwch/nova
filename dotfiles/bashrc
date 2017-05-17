@@ -200,7 +200,8 @@ fi
 #
 
 if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
-   exec startx
+    echo "should start x-server now..."
+    #exec startx
 fi
 
 export PATH=${HOME}/devenv/utils:${PATH}
@@ -210,3 +211,6 @@ export PATH=${HOME}/devenv/utils:${PATH}
 #
 
 alias gs="git status"
+alias gd="git diff"
+alias gc="git commit"
+alias gl="git log --oneline --pretty --graph"
