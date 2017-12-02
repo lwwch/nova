@@ -55,3 +55,5 @@ alias gs="git status"
 alias gd="git diff"
 alias gc="git commit"
 alias gl="git log --oneline --pretty --graph"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
