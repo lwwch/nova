@@ -6,15 +6,10 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-fugitive'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'mileszs/ack.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'benmills/vimux'
 
 call plug#end()
-
-let g:ctrlp_working_path_mode = 'ra'
-let g:ackprg = 'ag --vimgrep --smart-case'
 
 "
 "   basic settings
@@ -23,8 +18,8 @@ let g:ackprg = 'ag --vimgrep --smart-case'
 set t_Co=256
 syntax on
 set number
-set ts=4
-set shiftwidth=4
+set ts=2
+set shiftwidth=2
 set expandtab
 set autoindent
 set smartindent
@@ -56,7 +51,7 @@ au BufRead,BufNewFile *.svh set filetype=verilog
 au BufRead,BufNewFile *.vh set filetype=verilog
 au! FileType python setl nosmartindent
 au! FileType verilog setl nosmartindent
-au! FileType sass setl sw=4
+au! FileType sass setl sw=2
 
 "
 "   vimux

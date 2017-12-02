@@ -1,12 +1,1 @@
-Development enviroment and general (Ubuntu-based) computer settings. Includes stuff like:
-
-* dotfiles
-* management scripts
-* custom utilities
-* themes
-
-Bootstrapping (from a clean install):
-
-```
-curl https://raw.githubusercontent.com/hathcock/devenv/master/bootstrap.sh | bash
-```
+_Styx_ is the name I (typically) give to my primary computer. This is a collection of my dotfiles, config/setup scripts, etc.
