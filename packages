@@ -12,6 +12,9 @@ curl \
 net-tools \
 feh \
 neofetch \
+htop \
+ninja-build \
+yasm \
 
 # vim-plugged installer
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
