@@ -1,0 +1,15 @@
+builddir = build
+objdir = $builddir/.objects
+cc = gcc
+cflags = -Wall -Werror -Wextra -std=c99 -pedantic -O3
+
+rule cc
+  command = $cc $cflags -c -MMD -MF $out.d -o $out $in
+  description = cc $cout
+
+rule link
+  command = $cc $in -o $out $clibs
+  description = link $cout
+
+build $objdir/prompt.c.o: cc prompt.c
+build $builddir/prompt: link $objdir/prompt.c.o
