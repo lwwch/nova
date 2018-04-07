@@ -1,54 +1,16 @@
 export TERM="xterm-256color"
 
-# some more ls aliases
+#
+# General Aliases
+#
+
 alias ls='ls --color=yes'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-__display_ret_code() {
-    local ret=$1
-    [ $ret -eq 0 ] && printf "\[\e[38;5;242m\](%3s)\[\e[0m\]" $ret && return
-    printf "\[\e[38;5;124m\](%3s)\[\e[0m\]" $ret
-}
-
-__display_user_at_host() {
-    echo " \[\e[38;5;248m\]\u@\h\[\e[0m\]"
-}
-
-__display_working_dir() {
-    printf "\[\e[38;5;250m\] \w \[\e[0m\]"
-}
-
-__display_git() {
-    local raw=$(git status 2>/dev/null | head -1)
-    [ "$raw" == "" ] && return
-    if [ "$raw" == "# Not currently on any branch." ]; then
-        # display tag
-        local tag=$(git log -n1 --pretty=format:%d | tr -d ' ' | tr -d '(' | tr -d ')')
-        printf "\[\e[38;5;247m\]%s \[\e[m\]" "$tag"
-    else
-        # display branch
-        local branch=$(echo "$raw" | awk '{print $3}')
-        printf "\[\e[38;5;247m\]%s \[\e[m\]" $branch
-    fi
-    # display dirty / clean
-    local status=$(git status -s)
-    local check=$(echo -e '\u2713')
-    local ex=$(echo -e '\u2717')
-    [ "$status" == "" ] && printf "\[\e[38;5;244m\]%s \[\e[0m\]" $check && return
-    local symbol=$(echo -e '\u2718')
-    printf "\[\e[38;5;124m\]%s \[\e[0m\]" $symbol
-}
-
-__generate_prompt() {
-    PS1="$(__display_ret_code $?)$(__display_user_at_host)$(__display_working_dir)$(__display_git) "
-}
-
-export PROMPT_COMMAND=__generate_prompt
-
 #
-#   git aliases
+# Git Aliases
 #
 
 alias gs="git status"
@@ -57,3 +19,9 @@ alias gc="git commit"
 alias gl="git log --oneline --pretty --graph"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+#
+# Python Environment
+#
+
+export PATH=${HOME}/.pyenv/bin:${PATH}
