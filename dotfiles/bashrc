@@ -28,5 +28,7 @@ add_path() {
   export PATH="$1":$PATH
 }
 
-add_path ${HOME}/third_party/ripgrep-0.8.1-x86_64-unknown-linux-musl
-add_path ${HOME}/.pyenv/bin
+THIRD=${HOME}/third_party
+
+add_path ${THIRD}/ripgrep-0.8.1-x86_64-unknown-linux-musl
+add_path ${THIRD}/go-1.10.1/bin
