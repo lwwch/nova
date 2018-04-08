@@ -18,10 +18,15 @@ alias gd="git diff"
 alias gc="git commit"
 alias gl="git log --oneline --pretty --graph"
 
+#
+# Custom Tools
+#
+
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-#
-# Python Environment
-#
+add_path() {
+  export PATH="$1":$PATH
+}
 
-export PATH=${HOME}/.pyenv/bin:${PATH}
+add_path ${HOME}/third_party/ripgrep-0.8.1-x86_64-unknown-linux-musl
+add_path ${HOME}/.pyenv/bin

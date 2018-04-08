@@ -10,6 +10,9 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'benmills/vimux'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 
 call plug#end()
 
@@ -30,7 +33,7 @@ set nobackup
 set showmatch
 set hlsearch
 set incsearch
-set mouse=incr
+set mouse=c
 set title
 set laststatus=2
 set backspace=indent,eol,start
@@ -40,7 +43,7 @@ set lazyredraw
 "   colorscheme
 "
 
-colorscheme elflord
+colorscheme dracula
 
 "
 "   filetype behavior
