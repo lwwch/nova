@@ -6,8 +6,7 @@ export TERM="xterm-256color"
 
 alias ls='ls --color=yes'
 alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+alias la='ls -A' alias l='ls -CF'
 
 #
 # Git Aliases
@@ -31,4 +30,12 @@ add_path() {
 THIRD=${HOME}/third_party
 add_path ${THIRD}/ripgrep-0.8.1-x86_64-unknown-linux-musl
 
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#
+# Custom Prompt
+#
+
+generate_prompt() {
+  export PS1=$(${HOME}/styx/prompt/build/deployed $?)
+}
+
+PROMPT_COMMAND=generate_prompt

@@ -23,12 +23,12 @@ typedef struct {
 
 void format_prompt(Prompt* p, int color, const char* fmt, ...) {
   if (color != -1) {
-    p->offset += snprintf(p->buffer + p->offset, LIMIT - p->offset, "\x1b[38;5;%dm", color); }
+    p->offset += snprintf(p->buffer + p->offset, LIMIT - p->offset, "\\[\x1b[38;5;%dm\\]", color); }
   va_list args;
   va_start(args, fmt);
   p->offset += vsnprintf(p->buffer + p->offset, LIMIT - p->offset, fmt, args);
   va_end(args);
-  p->offset += snprintf(p->buffer + p->offset, LIMIT - p->offset, "\x1b[0m");
+  p->offset += snprintf(p->buffer + p->offset, LIMIT - p->offset, "\\[\x1b[0m\\]");
 }
 
 void display_prompt(Prompt* p) {
