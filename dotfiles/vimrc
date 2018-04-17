@@ -12,7 +12,10 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+Plug 'romainl/Apprentice'
+Plug 'Valloric/YouCompleteMe'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
@@ -43,7 +46,8 @@ set lazyredraw
 "   colorscheme
 "
 
-colorscheme dracula
+colorscheme apprentice
+let g:airline_theme='tomorrow'
 
 "
 "   filetype behavior
@@ -64,3 +68,9 @@ au! FileType sass setl sw=2
 
 map <leader>rx :VimuxPromptCommand<CR>
 map <leader>rr :VimuxRunLastCommand<CR>
+
+"
+"   you complete me
+"
+
+set completeopt-=preview

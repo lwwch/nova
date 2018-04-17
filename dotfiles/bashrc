@@ -29,6 +29,6 @@ add_path() {
 }
 
 THIRD=${HOME}/third_party
-
 add_path ${THIRD}/ripgrep-0.8.1-x86_64-unknown-linux-musl
-add_path ${THIRD}/go-1.10.1/bin
+
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
