@@ -64,7 +64,7 @@ int main(int argc, char* argv[]) {
   char working[SHORT_LIMIT];
   memset(working, 0x00, sizeof(working));
   getcwd(working, sizeof(working));
-  format_prompt(&p, MAGENTA, "%s ", working);
+  format_prompt(&p, CYAN, "%s ", working);
 
   format_prompt(&p, WHITE, "> ");
   display_prompt(&p);
