@@ -63,8 +63,9 @@ int main(int argc, char* argv[]) {
   format_prompt(&p, WHITE, "wd ");
   char working[SHORT_LIMIT];
   memset(working, 0x00, sizeof(working));
-  getcwd(working, sizeof(working));
-  format_prompt(&p, CYAN, "%s ", working);
+  if (getcwd(working, sizeof(working)) != 0) {
+    format_prompt(&p, CYAN, "%s ", working);
+  }
 
   format_prompt(&p, WHITE, "> ");
   display_prompt(&p);

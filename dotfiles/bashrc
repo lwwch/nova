@@ -1,23 +1,19 @@
 export TERM="xterm-256color"
 
-#
-# Manjaro Stuff
-#
-
-export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1;41;5:votes=1;44:dsc=0:other=1;35"
-[ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
-source /usr/share/git/completion/git-completion.bash
-
 shopt -s checkwinsize
-
 shopt -s expand_aliases
-
-# export QT_SELECT=4
 
 # Enable history appending instead of overwriting.  #139609
 shopt -s histappend
 
-
+# Default bash completion (ubuntu 18.04)
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
 
 #
 # General Aliases
@@ -25,7 +21,8 @@ shopt -s histappend
 
 alias ls='ls --color=yes'
 alias ll='ls -alF'
-alias la='ls -A' alias l='ls -CF'
+alias la='ls -A'
+alias l='ls -CF'
 
 #
 # Git Aliases
@@ -40,14 +37,12 @@ alias gl="git log --oneline --pretty --graph"
 # Custom Tools
 #
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
 add_path() {
   export PATH="$1":$PATH
 }
 
 THIRD=${HOME}/third_party
-add_path ${THIRD}/ripgrep-0.8.1-x86_64-unknown-linux-musl
+add_path ${THIRD}/ripgrep-0.10.0-x86_64-unknown-linux-musl
 
 #
 # Custom Prompt
@@ -56,5 +51,12 @@ add_path ${THIRD}/ripgrep-0.8.1-x86_64-unknown-linux-musl
 generate_prompt() {
   export PS1=$(${HOME}/styx/prompt/build/deployed $?)
 }
-
 PROMPT_COMMAND=generate_prompt
+
+#
+# Other Utils
+#
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+source ${THIRD}/.pyenv/bin/activate
+export LD_LIBRARY_PATH=$THIRD/cpython-3.7.1/build/lib

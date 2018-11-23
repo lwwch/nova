@@ -10,12 +10,11 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'benmills/vimux'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'romainl/Apprentice'
 Plug 'Valloric/YouCompleteMe'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'ambv/black'
 
 call plug#end()
 
@@ -58,9 +57,11 @@ filetype plugin indent on
 au BufRead,BufNewFile *.sv set filetype=verilog
 au BufRead,BufNewFile *.svh set filetype=verilog
 au BufRead,BufNewFile *.vh set filetype=verilog
-au! FileType python setl nosmartindent
 au! FileType verilog setl nosmartindent
-au! FileType sass setl sw=2
+
+au! FileType python setl nosmartindent
+au! FileType python setl sw=4
+autocmd BufWritePre *.py execute ':Black'
 
 "
 "   vimux
