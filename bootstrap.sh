@@ -67,6 +67,11 @@ install_ripgrep() {
 }
 
 install_bar() {
+  if [ -d ~/third_party/i3status-rust ]; then
+    echo "i3status-rust already installed."
+    return 0
+  fi
+
   pushd $THIRD
   git clone https://github.com/greshake/i3status-rust
   cd i3status-rust && cargo build --release
@@ -82,6 +87,15 @@ install_alacritty()  {
   popd
 }
 
+install_playerctl() {
+  pushd $THIRD
+  wget https://github.com/acrisci/playerctl/releases/download/v2.0.1/playerctl-2.0.1_amd64.deb
+  sudo dpkg -i playerctl-2.0.1_amd64.deb
+  sudo apt-get install -f
+  rm playerctl-2.0.1_amd64.deb
+  popd
+}
+
 install_python_packages() {
   pip install -r requirements.txt
 }
@@ -93,3 +107,4 @@ install_pyenv
 install_ripgrep
 install_alacritty
 install_bar
+install_playerctl
