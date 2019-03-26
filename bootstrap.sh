@@ -26,6 +26,7 @@ install_packages() {
   libncursesw5-dev \
   libreadline-dev \
   libsqlite3-dev \
+  libdbus-1-dev \
   uuid-dev \
   python3-venv
 }
@@ -65,6 +66,13 @@ install_ripgrep() {
   popd
 }
 
+install_bar() {
+  pushd $THIRD
+  git clone https://github.com/greshake/i3status-rust
+  cd i3status-rust && cargo build --release
+  popd
+}
+
 install_alacritty()  {
   pushd $THIRD
   wget https://github.com/jwilm/alacritty/releases/download/v0.2.9/Alacritty-v0.2.9-x86_64.tar.gz
@@ -84,4 +92,4 @@ install_packages
 install_pyenv
 install_ripgrep
 install_alacritty
-install_python_packages
+install_bar
