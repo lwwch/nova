@@ -10,13 +10,13 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'benmills/vimux'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'romainl/Apprentice'
 Plug 'Valloric/YouCompleteMe'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'ambv/black'
 Plug 'rust-lang/rust.vim'
 Plug 'rhysd/vim-clang-format'
+Plug 'owickstrom/vim-colors-paramount'
+Plug 'fxn/vim-monochrome'
+Plug 'itchyny/lightline.vim'
 
 call plug#end()
 
@@ -47,8 +47,12 @@ set lazyredraw
 "   colorscheme
 "
 
-colorscheme apprentice
-let g:airline_theme='tomorrow'
+set noshowmode
+let g:lightline = {
+      \ 'colorscheme': 'nord',
+      \ }
+set background=dark
+colorscheme monochrome
 
 "
 "   filetype behavior
