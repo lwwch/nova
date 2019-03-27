@@ -1,0 +1,6 @@
+# On ubuntu 18.04 goes in /lib/systemd/system-sleep
+case $1 in
+  "pre")
+    i3lock -c 000000 -f
+    ;;
+esac

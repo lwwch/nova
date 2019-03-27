@@ -1,10 +1,10 @@
 #define _DEFAULT_SOURCE
 
+#include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
-#include <stdarg.h>
 #include <string.h>
+#include <unistd.h>
 
 #define LIMIT (1024)
 #define SHORT_LIMIT (64)
@@ -23,18 +23,19 @@ typedef struct {
 
 void format_prompt(Prompt* p, int color, const char* fmt, ...) {
   if (color != -1) {
-    p->offset += snprintf(p->buffer + p->offset, LIMIT - p->offset, "\\[\x1b[38;5;%dm\\]", color); }
+    p->offset += snprintf(p->buffer + p->offset, LIMIT - p->offset,
+                          "\\[\x1b[38;5;%dm\\]", color);
+  }
   va_list args;
   va_start(args, fmt);
   p->offset += vsnprintf(p->buffer + p->offset, LIMIT - p->offset, fmt, args);
   va_end(args);
-  p->offset += snprintf(p->buffer + p->offset, LIMIT - p->offset, "\\[\x1b[0m\\]");
+  p->offset +=
+      snprintf(p->buffer + p->offset, LIMIT - p->offset, "\\[\x1b[0m\\]");
 }
 
-void display_prompt(Prompt* p) {
-  fprintf(stdout, "%s\n", p->buffer);
-}
-  
+void display_prompt(Prompt* p) { fprintf(stdout, "%s\n", p->buffer); }
+
 int main(int argc, char* argv[]) {
   Prompt p;
   p.offset = 0;
@@ -51,7 +52,7 @@ int main(int argc, char* argv[]) {
 
   char login[SHORT_LIMIT];
   memset(login, 0x00, sizeof(login));
-  getlogin_r(login,  sizeof(login));
+  getlogin_r(login, sizeof(login));
   format_prompt(&p, BLUE, "%s ", login);
 
   format_prompt(&p, WHITE, "at ");

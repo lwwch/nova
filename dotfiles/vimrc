@@ -17,6 +17,7 @@ Plug 'rhysd/vim-clang-format'
 Plug 'owickstrom/vim-colors-paramount'
 Plug 'fxn/vim-monochrome'
 Plug 'itchyny/lightline.vim'
+Plug 'arcticicestudio/nord-vim'
 
 call plug#end()
 
@@ -47,12 +48,13 @@ set lazyredraw
 "   colorscheme
 "
 
+let g:nord_cursor_line_number_background = 1
 set noshowmode
 let g:lightline = {
       \ 'colorscheme': 'nord',
       \ }
 set background=dark
-colorscheme monochrome
+colorscheme nord
 
 "
 "   filetype behavior
