@@ -1,7 +1,0 @@
-Many issues with power consumption, fans, cpu temp, etc. Trying to solve:
-
-* Wifi disconnect maybe solved with /etc/NetworkManager/conf.d/something-default-wifi powersave=2 (not =3)
-* install tlp tlp-rdw powertop
-* power top attempts:
-  sudo powertop --auto-tune
-  Monitor with sudo powertop

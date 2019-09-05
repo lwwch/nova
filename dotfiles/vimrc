@@ -4,20 +4,20 @@
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-fugitive'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'benmills/vimux'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 Plug 'Valloric/YouCompleteMe'
 Plug 'ambv/black'
-Plug 'rust-lang/rust.vim'
-Plug 'rhysd/vim-clang-format'
-Plug 'owickstrom/vim-colors-paramount'
+Plug 'benmills/vimux'
+Plug 'chriskempson/base16-vim'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'fxn/vim-monochrome'
 Plug 'itchyny/lightline.vim'
-Plug 'arcticicestudio/nord-vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'owickstrom/vim-colors-paramount'
+Plug 'rhysd/vim-clang-format'
+Plug 'rust-lang/rust.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-sensible'
 
 call plug#end()
 
@@ -48,13 +48,10 @@ set lazyredraw
 "   colorscheme
 "
 
-let g:nord_cursor_line_number_background = 1
+let base16colorspace=256
+colorscheme base16-tomorrow-night
 set noshowmode
-let g:lightline = {
-      \ 'colorscheme': 'nord',
-      \ }
 set background=dark
-colorscheme nord
 
 "
 "   filetype behavior
