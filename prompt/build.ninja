@@ -2,7 +2,7 @@ builddir = build
 objdir = $builddir/.objects
 cc = gcc
 cflags = -Wall -Werror -Wextra -std=c99 -pedantic -O3
-clibs = -static
+clibs = -lgit2
 
 rule cc
   command = $cc $cflags -c -MMD -MF $out.d -o $out $in

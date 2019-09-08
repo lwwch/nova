@@ -6,15 +6,6 @@ shopt -s expand_aliases
 # Enable history appending instead of overwriting.  #139609
 shopt -s histappend
 
-# Default bash completion (ubuntu 18.04)
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
-fi
-
 #
 # General Aliases
 #
@@ -42,14 +33,14 @@ add_path() {
 }
 
 THIRD=${HOME}/third_party
-add_path ${THIRD}/ripgrep-0.10.0-x86_64-unknown-linux-musl
+export PATH=${THIRD}:$PATH
 
 #
 # Custom Prompt
 #
 
 generate_prompt() {
-  export PS1=$(${HOME}/styx/prompt/build/deployed $?)
+  export PS1=$(${HOME}/nova/prompt/build/deployed $?)
 }
 PROMPT_COMMAND=generate_prompt
 
@@ -58,5 +49,19 @@ PROMPT_COMMAND=generate_prompt
 #
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-source ${THIRD}/.pyenv/bin/activate
-export LD_LIBRARY_PATH=$THIRD/cpython-3.7.1/build/lib
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/myles/third_party/conda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/myles/third_party/conda/etc/profile.d/conda.sh" ]; then
+        . "/home/myles/third_party/conda/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/myles/third_party/conda/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
