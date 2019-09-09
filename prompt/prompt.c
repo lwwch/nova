@@ -122,8 +122,8 @@ int main(int argc, char* argv[]) {
 
   const char* conda_env = getenv("CONDA_DEFAULT_ENV");
   if (conda_env != NULL) {
-    format_prompt(&p, NONE, "[");
-    format_prompt(&p, GREEN, "py: %s", conda_env);
+    format_prompt(&p, NONE, "[py: ");
+    format_prompt(&p, GREEN, "%s", conda_env);
     format_prompt(&p, NONE, "] ");
   }
 
