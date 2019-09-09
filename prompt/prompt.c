@@ -87,7 +87,7 @@ void modify_for_home_relative(const char* user, const char* working) {
   const char* src = strdup(working);
   char* out = (char*)working;
   out[0] = '~';
-  strcpy(out + 1, working + 6 + user_len);
+  strcpy(out + 1, src + 6 + user_len);
   free((void*)src);
 }
 
