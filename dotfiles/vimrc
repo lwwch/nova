@@ -6,8 +6,8 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'Valloric/YouCompleteMe'
 Plug 'ambv/black'
+Plug 'arcticicestudio/nord-vim'
 Plug 'benmills/vimux'
-Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'fxn/vim-monochrome'
 Plug 'itchyny/lightline.vim'
@@ -48,10 +48,11 @@ set lazyredraw
 "   colorscheme
 "
 
-let base16colorspace=256
-colorscheme base16-tomorrow-night
+colorscheme nord
 set noshowmode
 set background=dark
+
+let g:lightline = { 'colorscheme': 'nord' }
 
 "
 "   filetype behavior
