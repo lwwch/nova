@@ -33,7 +33,9 @@ add_path() {
 }
 
 THIRD=${HOME}/third_party
-export PATH=${THIRD}:$PATH
+
+add_path $THIRD
+add_path $THIRD/Python-3.8.0/install/bin
 
 #
 # Custom Prompt
@@ -49,19 +51,3 @@ PROMPT_COMMAND=generate_prompt
 #
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/myles/third_party/conda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/myles/third_party/conda/etc/profile.d/conda.sh" ]; then
-        . "/home/myles/third_party/conda/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/myles/third_party/conda/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
