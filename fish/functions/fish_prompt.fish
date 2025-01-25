@@ -34,9 +34,9 @@ function _prompt_status --on-event fish_postexec
   set --local last_status $pipestatus
   for code in $last_status
     if test $code -eq 0
-      set --global _prompt_status (echo (set_color brblue)""$last_status)
+      set --global _prompt_status (echo (set_color brblue)""$last_status)
     else
-      set --global _prompt_status (echo (set_color brred)""$last_status)
+      set --global _prompt_status (echo (set_color brred)""$last_status)
     end
   end
 end
