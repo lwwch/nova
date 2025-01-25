@@ -90,8 +90,42 @@ require("lazy").setup({
     event = "InsertEnter",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-path"
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-buffer"
     },
+  },
+})
+
+local cmp = require("cmp")
+cmp.setup({
+  completion = {
+    keyword_length = 1,
+    completeopt = "menu,menuone,noinsert,noselect"
+  },
+  preselect = "none",
+  mapping = cmp.mapping.preset.insert({
+    ["<Tab>"] = function (fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      else
+        fallback()
+      end
+    end,
+    ["<S-Tab>"] = function (fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      else
+        fallback()
+      end
+    end,
+    ["<CR>"] = cmp.mapping.confirm({ select = false }),
+    -- if this is present, have to hit escape twice to get back to normal mode
+    -- ["<Esc>"] = cmp.mapping.abort(),
+  }),
+  sources = {
+    { name = "nvim_lsp" },
+    { name = "path" },
+    { name = "buffer" }
   },
 })
 
@@ -99,20 +133,26 @@ local caps = vim.lsp.protocol.make_client_capabilities()
 caps = vim.tbl_deep_extend("force", caps, require("cmp_nvim_lsp").default_capabilities())
 
 local lspconfig = require("lspconfig")
-lspconfig.ruff.setup({})
-lspconfig.clangd.setup({})
-
-local cmp = require("cmp")
-cmp.setup({
-  completion = { completeopt = "menu,menuone,noinsert" },
-  mapping = cmp.mapping.preset.insert({
-
-  }),
-  sources = {
-    { name = "nvim_lsp" },
-    { name = "path" }
-  },
+lspconfig.ruff.setup({
+  capabilities = caps
 })
+
+lspconfig.clangd.setup({
+  capabilities = caps
+})
+
+lspconfig.html.setup({
+  capabilities = caps
+})
+
+lspconfig.css_variables.setup({
+  capabilities = caps
+})
+
+lspconfig.ts_ls.setup({
+  capabilities = caps
+})
+
 
 vim.api.nvim_create_autocmd("BufWritePre", {
   callback = function()
