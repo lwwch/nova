@@ -46,7 +46,7 @@ function _prompt_timing --on-event fish_postexec
   set --local min (math --scale=0 $CMD_DURATION/60000 % 60)
   set --local hour (math --scale=0 $CMD_DURATION/3600000)
 
-  set --local out
+  set --local out "󱎫"
   test $hour -gt 0 && set --local --append out $hour"h"
   test $min -gt 0 && set --local --append out $min"m"
   set --local --append out $sec"s"
@@ -60,5 +60,5 @@ function fish_prompt --description "Fish/Myles"
 end
 
 function fish_right_prompt --description "Fish/Myles-Right"
-  echo -e (set_color brblack) (command date "+%Y-%m-%d %H:%M:%S %Z")
+  echo -e (set_color brblack) "" (command date "+%Y-%m-%d %H:%M:%S %Z")
 end
