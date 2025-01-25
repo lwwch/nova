@@ -94,6 +94,13 @@ require("lazy").setup({
       "hrsh7th/cmp-buffer"
     },
   },
+  -- jellybeans ported to nvim+lua
+  {
+    "metalelf0/jellybeans-nvim",
+    dependencies = {
+      "rktjmp/lush.nvim"
+    }
+  }
 })
 
 local cmp = require("cmp")
@@ -153,7 +160,6 @@ lspconfig.ts_ls.setup({
   capabilities = caps
 })
 
-
 vim.api.nvim_create_autocmd("BufWritePre", {
   callback = function()
     local mode = vim.api.nvim_get_mode().mode
@@ -162,3 +168,5 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end
   end
 })
+
+vim.cmd("colorscheme jellybeans-nvim")
