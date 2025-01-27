@@ -1,6 +1,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-vim.g.havenerdfont = true
+vim.g.have_nerd_font = true
 vim.opt.number = true
 vim.opt.mouse = "c"
 vim.opt.showmode = false
@@ -46,38 +46,11 @@ vim.opt.rtp:prepend(lazypath)
 -- plugins!
 require("lazy").setup({
   {
-    "nvim-telescope/telescope.nvim",
-    event = "VimEnter",
-    branch = "0.1.x",
+    "ibhagwan/fzf-lua",
     dependencies = {
-      "nvim-lua/plenary.nvim",
-      {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        build = "make",
-        cond = function()
-          return vim.fn.executable("make") == 1
-        end,
-      },
-      "nvim-telescope/telescope-ui-select.nvim",
-      {
-        "nvim-tree/nvim-web-devicons",
-        enabled = vim.g.have_nerd_font
-      },
+      "nvim-tree/nvim-web-devicons"
     },
-    config = function()
-      require("telescope").setup({
-        extentions = {
-          ["ui-select"] = {
-            require("telescope.themes").get_dropdown()
-          }
-        }
-      })
-      pcall(require("telescope").load_extension, "fzf")
-      pcall(require("telescope").load_extension, "ui-select")
-
-      local builtin = require("telescope.builtin")
-      vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "Find [F]iles" })
-    end
+    opts = {},
   },
   {
     "neovim/nvim-lspconfig",
@@ -168,5 +141,9 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end
   end
 })
+
+local fzf = require("fzf-lua");
+vim.keymap.set("n", "<C-g>", fzf.git_files)
+vim.keymap.set("n", "<C-f>", fzf.files)
 
 vim.cmd("colorscheme jellybeans-nvim")
